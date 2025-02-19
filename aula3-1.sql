@@ -1,61 +1,61 @@
-CREATE TABLE usuarios (
+CREATE TABLE users (
   id INT,
-  nome VARCHAR(255) NOT NULL COMMENT 'Nome do usuário',
-  email VARCHAR(255) NOT NULL UNIQUE COMMENT 'Endereço de e-mail do usuário',
-  data_nascimento DATE NOT NULL COMMENT 'Data de nascimento do usuário',
-  endereco VARCHAR(50) NOT NULL COMMENT 'Endereço do Cliente'
+  name VARCHAR(255) NOT NULL COMMENT 'User name',
+  email VARCHAR(255) NOT NULL UNIQUE COMMENT 'User email address',
+  birth_date DATE NOT NULL COMMENT 'User birth date',
+  address VARCHAR(50) NOT NULL COMMENT 'User address'
 );
 
-CREATE TABLE viagens.destinos (
+CREATE TABLE travels.destinations (
   id INT,
-  nome VARCHAR(255) NOT NULL UNIQUE COMMENT 'Nome do destino',
-  descricao VARCHAR(255) NOT NULL COMMENT 'Descrição do destino'
+  name VARCHAR(255) NOT NULL UNIQUE COMMENT 'Destination name',
+  description VARCHAR(255) NOT NULL COMMENT 'Destination description'
 );
 
-CREATE TABLE viagens.reservas (
-  id INT COMMENT 'Identificador único da reserva',
-  id_usuario INT COMMENT 'Referência ao ID do usuário que fez a reserva',
-  id_destino INT COMMENT 'Referência ao ID do destino da reserva',
-  data DATE COMMENT 'Data da reserva',
-  status VARCHAR(255) DEFAULT 'pendente' COMMENT 'Status da reserva (confirmada, pendente, cancelada, etc.)'
+CREATE TABLE travels.bookings (
+  id INT COMMENT 'Unique booking identificator',
+  id_user INT COMMENT 'User ID who make the booking',
+  id_destination INT COMMENT 'booking destination ID',
+  date DATE COMMENT 'booking date',
+  status VARCHAR(255) DEFAULT 'pending' COMMENT 'Booking status (confirmed, pending, canceled, etc.)'
 );
 
 -- Inserts --
-INSERT INTO viagens.usuarios (id, nome, email, data_nascimento, endereco) VALUES 
-(1, 'João Silva', 'joao@example.com', '1990-05-15', 'Rua A, 123, Cidade X, Estado Y'),
-(2, 'Maria Santos', 'maria@example.com', '1985-08-22', 'Rua B, 456, Cidade Y, Estado Z'),
-(3, 'Pedro Souza', 'pedro@example.com', '1998-02-10', 'Avenida C, 789, Cidade X, Estado Y');
+INSERT INTO travels.users (id, name, email, birth_date, address) VALUES 
+(1, 'João Silva', 'joao@email.com', '1990-05-15', 'Rua Altamiro Guimarães, 123, Tubarão, SC'),
+(2, 'Maria Santos', 'maria@email.com', '1985-08-22', 'Rua Fortunato Brunato, 456, Tubarão, SC'),
+(3, 'Pedro Souza', 'pedro@email.com', '1998-02-10', 'Avenida Marechal Deodoro, 789, Tubarão, SC');
 
-INSERT INTO viagens.destinos (id, nome, descricao) VALUES 
+INSERT INTO travels.destinations (id, name, description) VALUES 
 (1, 'Praia das Tartarugas', 'Uma bela praia com areias brancas e mar cristalino'),
 (2, 'Cachoeira do Vale Verde', 'Uma cachoeira exuberante cercada por natureza'),
 (3, 'Cidade Histórica de Pedra Alta', 'Uma cidade rica em história e arquitetura');
 
-INSERT INTO viagens.reservas (id, id_usuario, id_destino, data, status) VALUES 
-(1, 1, 2, '2023-07-10', 'confirmada'),
-(2, 2, 1, '2023-08-05', 'pendente'),
-(3, 3, 3, '2023-09-20', 'cancelada');
+INSERT INTO travels.bookings (id, id_user, id_destination, date, status) VALUES 
+(1, 1, 2, '2023-07-10', 'confirmed'),
+(2, 2, 1, '2023-08-05', 'pending'),
+(3, 3, 3, '2023-09-20', 'canceled');
 
 -- Selects --
 
 -- Selecionar todos os registros da tabela "usuarios"
-SELECT * FROM usuarios;
+SELECT * FROM users;
 
 -- Selecionar apenas o nome e o email dos usuários
-SELECT nome, email FROM usuarios;
+SELECT name, email FROM users;
 
 -- Selecionar os usuários que possuem o nome "João Silva"
-SELECT * FROM usuarios WHERE nome = 'João Silva';
+SELECT * FROM users WHERE name = 'João Silva';
 
 -- Selecionar os usuários que nasceram antes de uma determinada data
-SELECT * FROM usuarios WHERE data_nascimento < '1990-01-01';
+SELECT * FROM users WHERE birth_date < '1990-01-01';
 
 -- Like
-SELECT * FROM usuarios WHERE nome LIKE '%Silva%';
-SELECT * FROM usuarios WHERE nome LIKE 'Jo_o%';
+SELECT * FROM users WHERE name LIKE '%Silva%';
+SELECT * FROM users WHERE name LIKE 'Jo_o%';
 
 -- Update --
-UPDATE usuarios SET endereco = 'Nova Rua, 123' WHERE email = 'joao@example.com';
+UPDATE users SET address = 'Rua Joao Paulo, 123, Imbituba, SC' WHERE email = 'joao@email.com';
 
 -- delete --
-DELETE FROM reservas WHERE status = 'cancelada';
+DELETE FROM bookings WHERE status = 'canceled';
