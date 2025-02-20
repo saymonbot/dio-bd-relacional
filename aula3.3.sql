@@ -1,5 +1,5 @@
 -- Update --
-UPDATE usuarios SET endereco = 'Nova Rua, 123' WHERE email = 'joao@example.com';
+UPDATE users SET address = 'New street, 123' WHERE email = 'joao@example.com';
 
 -- delete --
-DELETE FROM reservas WHERE status = 'cancelada';
+DELETE FROM bookings WHERE status = 'canceled';

@@ -2,51 +2,51 @@
 
 -- Primary Key--
 -- Tabela "usuarios"
-ALTER TABLE usuarios
+ALTER TABLE users
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
 -- Tabela "destinos"
-ALTER TABLE destinos
+ALTER TABLE destinations
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
 -- Tabela "reservas"
-ALTER TABLE reservas
+ALTER TABLE bookings
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
 -- Exemplos --
 
 -- Inserção na tabela "usuarios"
-INSERT INTO usuarios (nome, email, data_nascimento, endereco)
-VALUES ('João Maria', 'joaomaria@example.com', '1990-01-01', 'Rua A, 123');
+INSERT INTO users (name, email, birth_date, address)
+VALUES ('João Maria', 'joaomaria@example.com', '1990-01-01', 'Street A, 123');
 
 -- Inserção na tabela "destinos"
-INSERT INTO destinos (nome, descricao)
+INSERT INTO destinations (name, description)
 VALUES ('Praia Teste', 'Destino paradisíaco com belas praias.');
 
 -- Inserção na tabela "reservas"
-INSERT INTO reservas (id_usuario, id_destino, data, status)
-VALUES (4, 4, '2023-07-01', 'pendente');
+INSERT INTO bookings (id_user, id_destination, date, status)
+VALUES (4, 4, '2023-07-01', 'pending');
 
 -- Chaves estrangeiras --
 
 -- Adicionando chave estrangeira na tabela "reservas" referenciando a tabela "usuarios"
-ALTER TABLE reservas
-ADD CONSTRAINT fk_reservas_usuarios
-FOREIGN KEY (id_usuario) REFERENCES usuarios(id);
+ALTER TABLE bookings
+ADD CONSTRAINT fk_bookings_users
+FOREIGN KEY (id_user) REFERENCES users(id);
 
 -- Adicionando chave estrangeira na tabela "reservas" referenciando a tabela "destinos"
-ALTER TABLE reservas
-ADD CONSTRAINT fk_reservas_destinos
-FOREIGN KEY (id_destino) REFERENCES destinos(id);
+ALTER TABLE bookings
+ADD CONSTRAINT fk_bookings_destinations
+FOREIGN KEY (id_destinations) REFERENCES destinations(id);
 
 -- Alterando a restrição da chave estrangeira "fk_reservas_usuarios" na tabela "reservas" para ON DELETE CASCADE
-ALTER TABLE reservas
-DROP FOREIGN KEY fk_reservas_usuarios;
+ALTER TABLE bookings
+DROP FOREIGN KEY fk_bookings_users;
 
-ALTER TABLE reservas
-ADD CONSTRAINT fk_reservas_usuarios
-FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+ALTER TABLE bookings
+ADD CONSTRAINT fk_bookings_users
+FOREIGN KEY (id_users) REFERENCES users(id)
 ON DELETE CASCADE;

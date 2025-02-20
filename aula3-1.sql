@@ -22,9 +22,9 @@ CREATE TABLE travels.bookings (
 
 -- Inserts --
 INSERT INTO travels.users (id, name, email, birth_date, address) VALUES 
-(1, 'João Silva', 'joao@email.com', '1990-05-15', 'Rua Altamiro Guimarães, 123, Tubarão, SC'),
-(2, 'Maria Santos', 'maria@email.com', '1985-08-22', 'Rua Fortunato Brunato, 456, Tubarão, SC'),
-(3, 'Pedro Souza', 'pedro@email.com', '1998-02-10', 'Avenida Marechal Deodoro, 789, Tubarão, SC');
+(1, 'João Silva', 'joao@example.com', '1990-05-15', 'Street A, 123, City X, State Y'),
+(2, 'Maria Santos', 'maria@example.com', '1985-08-22', 'Street B, 456, City Y, State Z'),
+(3, 'Pedro Souza', 'pedro@example.com', '1998-02-10', 'Avenue C, 789, City X, State Y');
 
 INSERT INTO travels.destinations (id, name, description) VALUES 
 (1, 'Praia das Tartarugas', 'Uma bela praia com areias brancas e mar cristalino'),
@@ -55,7 +55,7 @@ SELECT * FROM users WHERE name LIKE '%Silva%';
 SELECT * FROM users WHERE name LIKE 'Jo_o%';
 
 -- Update --
-UPDATE users SET address = 'Rua Joao Paulo, 123, Imbituba, SC' WHERE email = 'joao@email.com';
+UPDATE users SET address = 'Street D, 123, City Y, State Z' WHERE email = 'joao@example.com';
 
 -- delete --
 DELETE FROM bookings WHERE status = 'canceled';
