@@ -14,8 +14,8 @@ CREATE TABLE travels.destinations (
 
 CREATE TABLE travels.bookings (
   id INT COMMENT 'Unique booking identificator',
-  id_user INT COMMENT 'User ID who make the booking',
-  id_destination INT COMMENT 'booking destination ID',
+  id_user INT COMMENT 'User ID who maked the booking',
+  id_destination INT COMMENT 'destination ID of booking',
   date DATE COMMENT 'booking date',
   status VARCHAR(255) DEFAULT 'pending' COMMENT 'Booking status (confirmed, pending, canceled, etc.)'
 );
@@ -27,9 +27,9 @@ INSERT INTO travels.users (id, name, email, birth_date, address) VALUES
 (3, 'Pedro Souza', 'pedro@example.com', '1998-02-10', 'Avenue C, 789, City X, State Y');
 
 INSERT INTO travels.destinations (id, name, description) VALUES 
-(1, 'Praia das Tartarugas', 'Uma bela praia com areias brancas e mar cristalino'),
-(2, 'Cachoeira do Vale Verde', 'Uma cachoeira exuberante cercada por natureza'),
-(3, 'Cidade Histórica de Pedra Alta', 'Uma cidade rica em história e arquitetura');
+(1, 'Turtle Beach', 'A beautiful beach with white sand and crystal clear sea'),
+(2, 'Vale Verde Waterfall', 'A lush waterfall surrounded by nature'),
+(3, 'Historic City of Pedra Alta', 'A city rich in history and architecture');
 
 INSERT INTO travels.bookings (id, id_user, id_destination, date, status) VALUES 
 (1, 1, 2, '2023-07-10', 'confirmed'),
@@ -38,16 +38,16 @@ INSERT INTO travels.bookings (id, id_user, id_destination, date, status) VALUES
 
 -- Selects --
 
--- Selecionar todos os registros da tabela "usuarios"
+-- Select all records from the "users" table
 SELECT * FROM users;
 
--- Selecionar apenas o nome e o email dos usuários
+-- Select only the users name and email
 SELECT name, email FROM users;
 
--- Selecionar os usuários que possuem o nome "João Silva"
+-- Select users whose name is "João Silva"
 SELECT * FROM users WHERE name = 'João Silva';
 
--- Selecionar os usuários que nasceram antes de uma determinada data
+-- Select users who were born before a certain date
 SELECT * FROM users WHERE birth_date < '1990-01-01';
 
 -- Like
@@ -55,7 +55,7 @@ SELECT * FROM users WHERE name LIKE '%Silva%';
 SELECT * FROM users WHERE name LIKE 'Jo_o%';
 
 -- Update --
-UPDATE users SET address = 'Street D, 123, City Y, State Z' WHERE email = 'joao@example.com';
+UPDATE users SET address = 'New Street, 123' WHERE email = 'joao@example.com';
 
 -- delete --
 DELETE FROM bookings WHERE status = 'canceled';
