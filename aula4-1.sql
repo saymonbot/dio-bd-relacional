@@ -1,17 +1,17 @@
--- Adicionar colunas de endereço à tabela "Usuarios"
-ALTER TABLE Usuarios
-ADD rua VARCHAR(100),
-ADD numero VARCHAR(10),
-ADD cidade VARCHAR(50),
-ADD estado VARCHAR(50);
+-- Add address columns to table "users"
+ALTER TABLE users
+ADD Street VARCHAR(100),
+ADD Number VARCHAR(10),
+ADD City VARCHAR(50),
+ADD State VARCHAR(50);
 
--- Copia os dados da tabela original para a nova tabela
-UPDATE usuarios
-SET rua = SUBSTRING_INDEX(SUBSTRING_INDEX(endereco, ',', 1), ',', -1),
-    numero = SUBSTRING_INDEX(SUBSTRING_INDEX(endereco, ',', 2), ',', -1),
-    cidade = SUBSTRING_INDEX(SUBSTRING_INDEX(endereco, ',', 3), ',', -1),
-    estado = SUBSTRING_INDEX(endereco, ',', -1);
+-- Copy data from original table to new table
+UPDATE users
+SET Street = SUBSTRING_INDEX(SUBSTRING_INDEX(address, ',', 1), ',', -1),
+    Number = SUBSTRING_INDEX(SUBSTRING_INDEX(address, ',', 2), ',', -1),
+    City = SUBSTRING_INDEX(SUBSTRING_INDEX(address, ',', 3), ',', -1),
+    State = SUBSTRING_INDEX(address, ',', -1);
 
--- Exclusão da coluna "endereco" da tabela original
-ALTER TABLE usuarios
-DROP COLUMN endereco;
+-- Exclusion from column "address" from original table
+ALTER TABLE users
+DROP COLUMN address;
