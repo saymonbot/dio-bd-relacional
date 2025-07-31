@@ -1,48 +1,44 @@
-
-
 -- Primary Key--
--- Tabela "usuarios"
+-- Table "users"
 ALTER TABLE users
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
--- Tabela "destinos"
+-- Table "destinos"
 ALTER TABLE destinations
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
--- Tabela "reservas"
+-- Table "reservas"
 ALTER TABLE bookings
 MODIFY COLUMN id INT AUTO_INCREMENT,
 ADD PRIMARY KEY (id);
 
--- Exemplos --
-
--- Inserção na tabela "usuarios"
+-- Examples --
+-- Inserction on table "users"
 INSERT INTO users (name, email, birth_date, address)
 VALUES ('João Maria', 'joaomaria@example.com', '1990-01-01', 'Street A, 123');
 
--- Inserção na tabela "destinos"
+-- Inserction on table "destinations"
 INSERT INTO destinations (name, description)
-VALUES ('Praia Teste', 'Destino paradisíaco com belas praias.');
+VALUES ('Test Beach', 'Paradisiacal destination with beautiful beaches.');
 
--- Inserção na tabela "reservas"
+-- Inserction on table "bookings"
 INSERT INTO bookings (id_user, id_destination, date, status)
 VALUES (4, 4, '2023-07-01', 'pending');
 
--- Chaves estrangeiras --
-
--- Adicionando chave estrangeira na tabela "reservas" referenciando a tabela "usuarios"
+-- Foreign keys --
+-- Adding foreign keys on table "bookings" refering table "users"
 ALTER TABLE bookings
 ADD CONSTRAINT fk_bookings_users
 FOREIGN KEY (id_user) REFERENCES users(id);
 
--- Adicionando chave estrangeira na tabela "reservas" referenciando a tabela "destinos"
+-- Adding foreign keys on table "bookings" refering table "destinations"
 ALTER TABLE bookings
 ADD CONSTRAINT fk_bookings_destinations
 FOREIGN KEY (id_destinations) REFERENCES destinations(id);
 
--- Alterando a restrição da chave estrangeira "fk_reservas_usuarios" na tabela "reservas" para ON DELETE CASCADE
+-- Changing retrition to foreign key "fk_bookings_users" on table "bookings" to ON DELETE CASCADE
 ALTER TABLE bookings
 DROP FOREIGN KEY fk_bookings_users;
 
