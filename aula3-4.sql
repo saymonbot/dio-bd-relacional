@@ -1,5 +1,4 @@
--- Criando nova tabela --
-
+-- Creating new table --
 CREATE TABLE users_new (
   id INT,
   name VARCHAR(255) NOT NULL COMMENT 'user name',
@@ -8,17 +7,15 @@ CREATE TABLE users_new (
   address VARCHAR(100) NOT NULL COMMENT 'User address'
 );
 
--- Migrando os dados --
-
+-- Migrating data --
 INSERT INTO users_new
 SELECT * from users;
 
--- Excluindo tabela anterior --
+-- Deleting previous table --
 DROP table users;
 
--- Renomeando nova tabela --
+-- Renaming previous table --
 ALTER TABLE users_new RENAME users;
 
-
--- Ou opção 2 : Alterar tamanho da coluna endereço -- 
+-- Option 2 : Change address column size -- 
 ALTER TABLE users MODIFY COLUMN address VARCHAR(100);
