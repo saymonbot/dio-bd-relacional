@@ -1,43 +1,40 @@
-INSERT INTO usuarios (nome, email, data_nascimento, rua, numero, cidade, estado) VALUES ('Usuario sem reservas', 'semreservar@teste.com', '1990-10-10', 'Rua','123','cidade','estado');
+INSERT INTO users (name, email, birth_date, street, number, city, state) VALUES ('Users without bookings', 'withoutbooking@example.com', '1990-10-10', 'Street','123','City','State');
 
--- Traz apenas os usuario com reservas
-SELECT * FROM usuarios us
-INNER JOIN reservas rs
-	ON us.id = rs.id_usuario;
+-- Only users with bookings
+SELECT * FROM users us
+INNER JOIN bookings bk
+	ON us.id = bk.id_user;
 
--- Traz todos os usuario e suas reservas se tiver
-SELECT * FROM usuarios us
-INNER JOIN reservas rs
-	ON us.id = rs.id_usuario;
+-- All users and bookings if exist
+SELECT * FROM users us
+LEFT JOIN bookings bk
+	ON us.id = bk.id_user;
 
-INSERT INTO viagens.destinos ( nome, descricao) VALUES 
-('Deestino sem reserva', 'Uma bela praia com areias brancas e mar cristalino')
+INSERT INTO travels.destinations (name, description) VALUES 
+('Destination whitout booking', 'A beautiful beach with white sand and crystal clear sea')
 
--- Tras todos os destinos e as reservas se tiverem -- 
-SELECT * FROM reservas rs
-RIGHT JOIN destinos des
-	ON des.id = rs.id_destino;
+-- All destinations and bookings if exist -- 
+SELECT * FROM bookings bk
+RIGHT JOIN destinations des
+	ON des.id = bk.id_destination;
 
--- Produz o mesmo resultado que a anterior
-SELECT * FROM destinos des
-LEFT JOIN reservas rs
-	ON des.id = rs.id_destino;
+-- Same result as previous code
+SELECT * FROM destinations des
+LEFT JOIN bookings bk
+	ON des.id = bk.id_destination;
 
--- SUb consultas
+-- Sub-querys
+-- Users whitout bookings
+SELECT name
+FROM users
+WHERE id NOT IN (SELECT id_user FROM bookings);
 
--- Usuários que não fizeram nenhuma reserva
-SELECT nome
-FROM usuarios
-WHERE id NOT IN (SELECT id_usuario FROM reservas);
-
--- Subconsulta para encontrar os destinos menos populares (com menos reservas):
-
-SELECT nome
-FROM destinos
-WHERE id NOT IN (SELECT id_destino FROM reservas)
+-- Sub-query to find less populars destinations (whit less bookings):
+SELECT name
+FROM destinations
+WHERE id NOT IN (SELECT id_destination FROM bookings)
 ORDER BY id;
 
--- contagem de reservas por usuario
-
-SELECT nome, (SELECT COUNT(*) FROM reservas WHERE id_usuario = usuarios.id) AS total_reservas
-FROM usuarios;
+-- Bookings by users
+SELECT name, (SELECT COUNT(*) FROM bookings WHERE id_users = users.id) AS total_bookings
+FROM users;
