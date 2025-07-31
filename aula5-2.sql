@@ -1,43 +1,39 @@
-SELECT COUNT(*) FROM usuarios;
+SELECT COUNT(*) FROM users;
 
--- Media da idade dos usuarios
-SELECT AVG(TIMESTAMPDIFF(YEAR, data_nascimento, CURRENT_DATE())) AS idade
-FROM usuarios;
+--Average age by user
+SELECT AVG(TIMESTAMPDIFF(YEAR, birth_date, CURRENT_DATE())) AS age
+FROM users;
 
--- Soma da idade dos usuarios
-SELECT SUM(TIMESTAMPDIFF(YEAR, data_nascimento, CURRENT_DATE())) AS media_idade
-FROM usuarios;
+-- Sum age users
+SELECT SUM(TIMESTAMPDIFF(YEAR, birth_date, CURRENT_DATE())) AS average_age
+FROM users;
 
--- Menor Idade
-SELECT MIN(TIMESTAMPDIFF(YEAR, data_nascimento, CURRENT_DATE())) AS media_idade
-FROM usuarios;
+-- Lower age
+SELECT MIN(TIMESTAMPDIFF(YEAR, birth_date, CURRENT_DATE())) AS average_age
+FROM users;
 
--- Maior Idade
-SELECT MAX(TIMESTAMPDIFF(YEAR, data_nascimento, CURRENT_DATE())) AS media_idade
-FROM usuarios;
+-- Higher age
+SELECT MAX(TIMESTAMPDIFF(YEAR, birth_date, CURRENT_DATE())) AS average_age
+FROM users;
 
--- Calcula quantidade de reservas por destino --
-SELECT *, COUNT(*) AS total_reservas FROM reservas GROUP BY id_destino ;
+-- Calc quantity of bookings by destination --
+SELECT *, COUNT(*) AS total_bookings FROM bookings GROUP BY id_destination ;
 
 
 -- Limit
-SELECT *, COUNT(*) AS total_reservas FROM reservas GROUP BY id_destino LIMIT 1 OFFSET 2;
+SELECT *, COUNT(*) AS total_bookings FROM bookings GROUP BY id_destination LIMIT 1 OFFSET 2;
 
-SELECT *, COUNT(*) AS total_reservas FROM reservas GROUP BY id_destino LIMIT 1;
+SELECT *, COUNT(*) AS total_bookings FROM bookings GROUP BY id_destination LIMIT 1;
 
--- Ordenação
-SELECT nome
-FROM usuarios
-ORDER BY nome;
+-- Ordenation
+SELECT name
+FROM users
+ORDER BY name;
 
-SELECT nome, data_nascimento
-FROM usuarios
-ORDER BY data_nascimento, nome;
+SELECT name, birth_date
+FROM users
+ORDER BY birth_date, name;
 
-SELECT nome, data_nascimento
-FROM usuarios
-ORDER BY data_nascimento, nome DESC;
-
-
-
-
+SELECT name, birth_date
+FROM users
+ORDER BY birth_date, name DESC;
