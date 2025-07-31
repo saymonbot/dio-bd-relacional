@@ -1,4 +1,3 @@
-
 -- Inserts --
 INSERT INTO travels.users (id, name, email, birth_date, address) VALUES 
 (1, 'João Silva', 'joao@example.com', '1990-05-15', 'Street A, 123, City X, State Y'),
